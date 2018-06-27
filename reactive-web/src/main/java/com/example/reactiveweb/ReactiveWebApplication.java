@@ -1,12 +1,12 @@
-package com.example.nio;
+package com.example.reactiveweb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NioApplication {
+public class ReactiveWebApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NioApplication.class, args);
+        SpringApplication.run(ReactiveWebApplication.class, args);
     }
 }
