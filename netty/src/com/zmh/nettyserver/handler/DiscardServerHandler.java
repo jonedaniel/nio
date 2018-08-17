@@ -1,9 +1,7 @@
 package com.zmh.nettyserver.handler;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.ReferenceCountUtil;
 
 public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
 
@@ -21,6 +19,12 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
             ReferenceCountUtil.release(in);
         }
         */
+/*        ByteBuf in = (ByteBuf) msg;
+        while (in.isReadable()) {
+            System.out.print((char)in.readByte());
+            System.out.flush();
+        }*/
+
         ctx.writeAndFlush(msg);//echo telnet
     }
 

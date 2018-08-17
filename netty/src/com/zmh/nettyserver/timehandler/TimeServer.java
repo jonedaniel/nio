@@ -1,6 +1,5 @@
-package com.zmh.nettyserver;
+package com.zmh.nettyserver.timehandler;
 
-import com.zmh.nettyserver.handler.DiscardServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -15,11 +14,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  *
  * @createDate 2018/8/14
  */
-public class DiscardServer {
+public class TimeServer {
 
     private int port;
 
-    public DiscardServer(int port) {
+    public TimeServer(int port) {
         this.port = port;
     }
 
@@ -33,7 +32,8 @@ public class DiscardServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline().addLast(new DiscardServerHandler());
+                            socketChannel.pipeline().addLast(new TimeServerHandler());
+
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)
@@ -57,6 +57,6 @@ public class DiscardServer {
         } else {
             port = 8080;
         }
-        new DiscardServer(port).run();
+        new TimeServer(port).run();
     }
 }
