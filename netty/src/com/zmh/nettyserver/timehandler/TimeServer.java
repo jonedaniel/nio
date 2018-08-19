@@ -1,5 +1,8 @@
 package com.zmh.nettyserver.timehandler;
 
+import com.zmh.nettyserver.pojoSolution.TimeDecoder1;
+import com.zmh.nettyserver.pojoSolution.TimeEncoder2;
+import com.zmh.nettyserver.pojoSolution.TimeServerHandler2;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -32,8 +35,8 @@ public class TimeServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline().addLast(new TimeServerHandler());
-
+//                            socketChannel.pipeline().addLast(new TimeServerHandler());
+                            socketChannel.pipeline().addLast(new TimeEncoder2(),new TimeServerHandler2());
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)
