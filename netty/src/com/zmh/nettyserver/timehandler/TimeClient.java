@@ -1,5 +1,8 @@
 package com.zmh.nettyserver.timehandler;
 
+import com.zmh.nettyserver.pojoSolution.TimeClientHandler2;
+import com.zmh.nettyserver.pojoSolution.TimeDecoder1;
+import com.zmh.nettyserver.pojoSolution.TimeEncoder2;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -10,9 +13,9 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class TimeClient {
-    public static void main(String[] args)throws Exception {
-        String host = "localhost";
-        int port = Integer.parseInt("8080");
+    public static void main(String[] args) throws Exception {
+        String         host        = "localhost";
+        int            port        = Integer.parseInt("8080");
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
@@ -23,7 +26,10 @@ public class TimeClient {
             b.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new TimeClientHandler());
+//                    ch.pipeline().addLast(new TimeClientHandler());
+//                    ch.pipeline().addLast(new TimeClientHandler1());  //first solution
+//                    ch.pipeline().addLast(new TimeDecoder(), new TimeClientHandler());
+                    ch.pipeline().addLast(new TimeDecoder1(),new TimeClientHandler2());
                 }
             });
 
