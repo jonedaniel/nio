@@ -1,24 +1,28 @@
 package stream;
 
 
+import jdk.nashorn.internal.runtime.logging.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class StreamTest {
-    public static void main(String[] args) {
-
-        List<X> list = new ArrayList<>();
-        list.add(new X(1));
-        list.add(new X(1));
-        list.add(new X(1));
-        list.add(new X(1));
-        list.add(new X(1));
-        list.add(new X(1));
-        list.add(new X(1));
-        list.add(new X(1));
+    @Test
+    public void mapTo() {
+        List<Pojo> list = new ArrayList<>();
+        list.add(new Pojo(1));
+        list.add(new Pojo(1));
+        list.add(new Pojo(1));
+        list.add(new Pojo(1));
+        list.add(new Pojo(1));
+        list.add(new Pojo(1));
+        list.add(new Pojo(1));
+        list.add(new Pojo(1));
 
         StreamTest test = new StreamTest();
 
@@ -29,8 +33,8 @@ public class StreamTest {
         }).sum());
     }
 
-    private int add(X x) {
-        return x.x;
+    private int add(Pojo pojo) {
+        return pojo.x;
     }
 
     private void otherOpt() {
@@ -38,10 +42,55 @@ public class StreamTest {
     }
 
     @Test
-    public void whatIsOptional() {
-        Optional<X> optional = Optional.of(new X(10));
-        System.out.println(optional.get().x);
+    public void commonUsage() {
+        Optional<List> optional = Optional.ofNullable(new Pojo().words);
+        System.out.println(optional.isPresent() ? optional.get().get(0) : "nothing");
     }
+
+    @Test
+    public void optionalApi() {
+        Pojo pojo1 = null;
+        Pojo pojo2 = new Pojo(2, "fuck off");
+        Pojo pojo3 = Optional.ofNullable(pojo1).orElse(pojo2);
+        System.out.println(pojo3);
+    }
+
+
+    /**
+     * 在执行较密集的调用时，比如调用 Web 服务或数据查询，这个差异会对性能产生重大影响。
+     *
+     * @createDate 2018/9/16
+     */
+    @Test
+    public void differenceBetweenOrElseAndOrElseGet() {
+        Pojo pojo = new Pojo(1, "fucking");
+        System.out.println("一：使用api获取新对象");
+        Pojo newPojo = Optional.ofNullable(pojo).orElse(newPojo());
+        System.out.println("二：使用api获取新对象");
+        pojo = Optional.ofNullable(pojo).orElseGet(() -> newPojo());
+    }
+
+    private Pojo newPojo() {
+        System.out.println("创建了新对象");
+        return new Pojo(0, "fuck you");
+    }
+
+    @Test
+    public void withMap() {
+        Pojo pojo = new Pojo(1, "go to the hell");
+        List<String> words = Optional.ofNullable(pojo)
+                .map(p -> p.getWords()).orElseGet(() -> new ArrayList<>());
+        Assert.assertNotNull(words);
+    }
+
+    @Test
+    public void withFilter() {
+        Pojo pojo = new Pojo(3, "fucker");
+
+        Optional<Pojo> optionalPojo = Optional.ofNullable(pojo).filter(p -> p.getWords() != null && p.getWords().size() > 0);
+        System.out.println(optionalPojo.isPresent());
+    }
+
 
 }
 
