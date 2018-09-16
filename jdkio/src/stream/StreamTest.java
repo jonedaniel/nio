@@ -1,6 +1,11 @@
-import javax.sound.midi.Soundbank;
+package stream;
+
+
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class StreamTest {
     public static void main(String[] args) {
@@ -32,12 +37,12 @@ public class StreamTest {
         System.out.println("hello world");
     }
 
-}
-
-class X {
-    int x;
-
-    X(int x) {
-        this.x = x;
+    @Test
+    public void whatIsOptional() {
+        Optional<X> optional = Optional.of(new X(10));
+        System.out.println(optional.get().x);
     }
+
 }
+
+
