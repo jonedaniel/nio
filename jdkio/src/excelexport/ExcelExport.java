@@ -1,12 +1,14 @@
-package localexport;
+package excelexport;
 
-import oracle.SqlString;
+import excelexport.model.Block;
+import excelexport.model.Csdn;
+import excelexport.db.oracle.SqlString;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.junit.Test;
-import util.DbUtil;
+import excelexport.db.DbUtil;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -41,7 +43,11 @@ public class ExcelExport {
         exportPoi(sql2, Block.class, "oracle");
     }
 
-    public static <T> void exportPoi(String sql, Class<T> clz, String dbName) {
+    static <T> void exportPoi(String sql, Class<T> clz) {
+        exportPoi(sql, clz,"oracle");
+    }
+
+    static <T> void exportPoi(String sql, Class<T> clz, String dbName) {
         String path = "C:\\Users\\Administrator\\Desktop\\";
         String name = "test";
         exportPoi(sql, clz, path, name, dbName);
@@ -58,7 +64,7 @@ public class ExcelExport {
      * @author zhaomenghui
      * @createDate 2018/9/20
      */
-    public static <T> void exportPoi(String sql, Class<T> clz, String path, String name, String dbName) {
+    static <T> void exportPoi(String sql, Class<T> clz, String path, String name, String dbName) {
         List<T> list = DbUtil.query(sql, clz, dbName);
 
         HSSFWorkbook excelWorkBook = new HSSFWorkbook();

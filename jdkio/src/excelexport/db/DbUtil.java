@@ -1,6 +1,6 @@
-package util;
+package excelexport.db;
 
-import oracle.OracleDbUtil;
+import excelexport.db.oracle.OracleDbUtil;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;

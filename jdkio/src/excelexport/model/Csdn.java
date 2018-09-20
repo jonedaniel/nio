@@ -1,4 +1,4 @@
-package localexport;
+package excelexport.model;
 
 public class Csdn {
     private int    id;
