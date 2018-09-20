@@ -1,9 +1,16 @@
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
+package util;
 
 import java.io.*;
-import java.sql.DriverManager;
 
+
+/**
+ * Title: ReadAndWrite
+ * Description: 读写测试
+ *
+ * @author zhaomenghui
+ * @createDate 2018/9/20
+ * @version 1.0
+ */
 public class ReadAndWrite {
 
     public static void main(String[] args) throws Exception {
@@ -66,21 +73,5 @@ public class ReadAndWrite {
         writer.close();
     }
 
-    private static int execute(String sql) throws Exception{
-        Connection conn = null;
-        Statement  stmt = null;
-            // 注册 JDBC 驱动
-            Class.forName("com.mysql.jdbc.Driver");
 
-            // 打开链接
-            System.out.println("连接数据库...");
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","admin");
-
-            stmt = (Statement) conn.createStatement();
-            int ret = stmt.executeUpdate(sql);
-            // 完成后关闭
-            stmt.close();
-            conn.close();
-            return ret;
-    }
 }
