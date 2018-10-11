@@ -22,6 +22,10 @@ import java.util.List;
  * @createDate 2018/9/20
  */
 public class DbUtil {
+    private final static String driver   = "com.mysql.jdbc.Driver";
+    private final static String url      = "jdbc:mysql://localhost:3306/test";
+    private final static String username = "root";
+    private final static String password = "admin";
 
     private static Connection getConn(String dbName) {
         assert dbName != null && !dbName.equals("");
@@ -38,11 +42,11 @@ public class DbUtil {
         try {
 
             // 注册 JDBC 驱动
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(driver);
 
             // 打开链接
             System.out.println("连接数据库...");
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "admin");
+            conn = (Connection) DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
