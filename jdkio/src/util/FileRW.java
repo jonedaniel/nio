@@ -1,17 +1,12 @@
 package util;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 
 public class FileRW {
     public static void main(String[] args) throws Exception {
-        System.out.println();
         String     userDir    = System.getProperty("user.dir");
         File       file       = new File(userDir + "/jdkio/out/util/temp.json");
-        File       retFile    = new File("ret.json");
         FileReader fileReader = new FileReader(file);
-        FileWriter fileWriter = new FileWriter(retFile);
 
 //        char[] buffer = new char[1024];
 
@@ -24,6 +19,11 @@ public class FileRW {
             }
         }
         String s = new String(sb);
-        System.out.println(s);
+
+        FileWriter   fileWriter = new FileWriter(userDir + "/jdkio/temp2.json");
+        fileWriter.write(s);
+
+        fileReader.close();
+        fileWriter.close();
     }
 }
