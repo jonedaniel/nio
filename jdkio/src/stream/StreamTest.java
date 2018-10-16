@@ -5,8 +5,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class StreamTest {
     @Test
@@ -88,7 +90,18 @@ public class StreamTest {
         System.out.println(optionalPojo.isPresent());
     }
 
-
+    @Test
+    public void mapToQueue() {
+        List<String> collect = Arrays.stream(new String[]{"hello", "world", "hello", "world", "hello", "world"})
+                .filter(str->!str.equals("zmh"))
+                .collect(Collectors.toList());
+        System.out.println(collect);
+        String[] strings = collect.stream()
+                .map(s -> s.replace("l", ""))
+                .filter(s -> !s.contains("r"))
+                .toArray(String[]::new);
+        System.out.println(Arrays.toString(strings));
+    }
 }
 
 
