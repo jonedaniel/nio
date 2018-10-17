@@ -27,10 +27,17 @@ public class ThreadUtil {
     }
 
     public static ThreadFactory getThreadFactory() {
-        return new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                return ThreadUtil.helloThread();
+        return r -> ThreadUtil.helloThread();
+    }
+
+    public static Runnable waitingThread(int seconds) {
+        return () -> {
+            String name = Thread.currentThread().getName();
+            try {
+                Thread.sleep(seconds);
+                System.out.println(name + "执行完成...");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         };
     }
