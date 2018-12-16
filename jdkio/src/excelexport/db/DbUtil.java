@@ -1,6 +1,5 @@
+/*
 package excelexport.db;
-
-import excelexport.db.oracle.OracleDbUtil;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
@@ -13,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Title: DbUtil
  * Description: 数据库工具类
@@ -20,22 +20,23 @@ import java.util.List;
  * @author zhaomenghui
  * @version 1.0
  * @createDate 2018/9/20
- */
+ *//*
+
 public class DbUtil {
     private final static String driver   = "com.mysql.jdbc.Driver";
     private final static String url      = "jdbc:mysql://localhost:3306/test";
     private final static String username = "root";
     private final static String password = "admin";
 
-    private static Connection getConn(String dbName) {
-        assert dbName != null && !dbName.equals("");
-        if (dbName.equals("mysql")) {
-            return getMysqlConn();
-        } else if (dbName.equals("oracle")) {
-            return OracleDbUtil.getConn();
-        }
-        return null;
-    }
+//    private static Connection getConn(String dbName) {
+//        assert dbName != null && !dbName.equals("");
+//        if (dbName.equals("mysql")) {
+//            return getMysqlConn();
+//        } else if (dbName.equals("oracle")) {
+//            return OracleDbUtil.getConn();
+//        }
+//        return null;
+//    }
 
     private static Connection getMysqlConn() {
         Connection conn = null;
@@ -55,7 +56,7 @@ public class DbUtil {
 
     public static int execute(String sql, String dbName) throws Exception {
         Statement  stmt = null;
-        Connection conn = getConn(dbName);
+//        Connection conn = getConn(dbName);
         stmt = (Statement) conn.createStatement();
         int ret = stmt.executeUpdate(sql);
         // 完成后关闭
@@ -98,3 +99,4 @@ public class DbUtil {
         return list;
     }
 }
+*/

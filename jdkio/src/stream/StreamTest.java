@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamTest {
     @Test
@@ -101,6 +103,13 @@ public class StreamTest {
                 .filter(s -> !s.contains("r"))
                 .toArray(String[]::new);
         System.out.println(Arrays.toString(strings));
+    }
+
+    @Test
+    public void circleSuplier() {
+        AtomicInteger i = new AtomicInteger(0);
+        List<Integer> collect = Stream.generate(() -> i.getAndAdd(1)).collect(Collectors.toList());
+        System.out.println(collect);
     }
 }
 
