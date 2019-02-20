@@ -1,4 +1,4 @@
-package concurency;
+package test.concurency;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,6 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 
@@ -22,7 +19,7 @@ import static java.util.Arrays.asList;
  *      3.使用本地LinkedQueue处理线程共享变量速度莫名其妙的慢,然后druid连接池报超时,怀疑事务原因,躲开切面还是超时.
  *      4.使用redis 队列顺利解决. 10分钟级的问题变成1分钟.
  *  answer:
- *      1.发现在本地使用兵法队列时有问题,见queueBugExample
+ *      1.发现在本地使用并发队列时有问题,见queueBugExample
  * @author zhaomenghui93@163.com
  * @createDate 2018/12/16
  */

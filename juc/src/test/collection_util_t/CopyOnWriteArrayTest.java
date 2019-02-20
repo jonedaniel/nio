@@ -1,4 +1,4 @@
-package collectiont;
+package test.collection_util_t;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;

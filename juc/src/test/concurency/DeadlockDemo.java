@@ -1,4 +1,4 @@
-package concurency;
+package test.concurency;
 
 /**
  * 死锁演示

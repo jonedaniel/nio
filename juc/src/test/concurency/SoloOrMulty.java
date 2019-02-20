@@ -1,4 +1,4 @@
-package concurency;
+package test.concurency;
 
 import java.util.concurrent.*;
 
