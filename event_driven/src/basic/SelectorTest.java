@@ -7,7 +7,7 @@ import static java.nio.channels.SelectionKey.*;
 
 public class SelectorTest {
     public static void main(String[] args) throws IOException {
-        interestSetOpTest();
+//        interestSetOpTest();
     }
 
     private static void interestSetOpTest() throws IOException{

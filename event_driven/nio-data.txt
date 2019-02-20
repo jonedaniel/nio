@@ -1,0 +1,7 @@
+java nio include three important concept
+channel buffer selector
+data can write from buffer into channel
+and read from channel into buffer
+there also has sccater and gathers 
+the first alow data read from a channel into many buffer
+gathers on the contrary write from a channel into many buffer

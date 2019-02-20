@@ -1,14 +1,13 @@
 package excelexport;
 
+import excelexport.db.DbUtil;
 import excelexport.model.Block;
 import excelexport.model.Csdn;
-import excelexport.db.oracle.SqlString;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.junit.Test;
-import excelexport.db.DbUtil;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -37,10 +36,11 @@ public class ExcelExport {
 
     @Test
     public void testPoi() {
-        String sql = "select * from csdn limit 0,10";
+        String sql  = "select * from hdic.t_hm_resblock";
 
-        String sql2 = SqlString.sql1;
-        exportPoi(sql2, Block.class, "oracle");
+//        String sql = "select * from csdn limit 0,10";
+
+//        exportPoi(sql, Block.class, "oracle");
     }
 
     static <T> void exportPoi(String sql, Class<T> clz) {
