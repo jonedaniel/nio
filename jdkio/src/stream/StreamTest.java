@@ -4,11 +4,13 @@ package stream;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 
 public class StreamTest {
     @Test
@@ -94,13 +96,73 @@ public class StreamTest {
     public void mapToQueue() {
         List<String> collect = Arrays.stream(new String[]{"hello", "world", "hello", "world", "hello", "world"})
                 .filter(str->!str.equals("zmh"))
-                .collect(Collectors.toList());
+                .collect(toList());
         System.out.println(collect);
         String[] strings = collect.stream()
                 .map(s -> s.replace("l", ""))
                 .filter(s -> !s.contains("r"))
                 .toArray(String[]::new);
         System.out.println(Arrays.toString(strings));
+    }
+
+    @Test
+    public void circleSuplier() {
+        AtomicInteger i = new AtomicInteger(0);
+        List<Integer> collect = Stream.generate(() -> i.getAndAdd(1)).collect(toList());
+        System.out.println(collect);
+    }
+
+    @Test
+    public void testBeanMax() {
+        List<Student> list = new ArrayList<>(asList(new Student(1, 4, "a"), new Student(4, 5, "b"), new Student(5, 5, "c")));
+        int maxScore= list.stream().max(Comparator.comparingInt(Student::getScore)).orElse(new Student(0,0,"")).getScore();
+        if (maxScore==0) return;
+        List<Student> collect = list.stream().filter(s -> s.getScore() == maxScore).collect(toList());
+        System.out.println(collect);
+    }
+}
+class Student{
+    private int id;
+    private int score;
+    private String name;
+
+    public Student(int id, int score, String name) {
+        this.id = id;
+        this.score = score;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", score=" + score +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
 
